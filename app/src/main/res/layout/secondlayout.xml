@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.drcom.ListViewDemo.SecondActivity">
+
+    <include
+        layout="@layout/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp" />
+
+    <com.drcom.ListViewDemo.CircleView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#000000"
+        app:circle_color="@color/colorPrimary">
+
+    </com.drcom.ListViewDemo.CircleView>
+
+
+</LinearLayout>

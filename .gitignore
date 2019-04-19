@@ -1,0 +1,17 @@
+*.iml
+.gradle
+/local.properties
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+
+ <ignored path=".gradle/" />
+    <ignored path=".idea/" />
+    <ignored path="app/build/" />
+    <ignored mask="*.iml" />
+    <ignored path="local.properties" />
