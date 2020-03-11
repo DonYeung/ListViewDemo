@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ListViewDemo</string>
+    <string name="app_name">aidl_client_Demo</string>
+    <string name="text_edit_hint">请输入</string>
 </resources>

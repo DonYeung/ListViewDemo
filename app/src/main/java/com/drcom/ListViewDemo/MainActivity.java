@@ -4,23 +4,38 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.Process;
 import android.os.RemoteException;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
+import android.widget.Chronometer;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private IRemoteService remoteService;
+    private  Chronometer cmPasstime;
+    private long mNextTime = 100L;
+    private long seconds = 0;//秒数(时间)
+    private Handler mHandler = new Handler(Looper.getMainLooper());
+
+    private SimpleDateFormat mFormat = new SimpleDateFormat("HH:mm:ss");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        cmPasstime = findViewById(R.id.cm_passtime);
 //        Intent intent = new Intent();
 //        intent.setClass(MainActivity.this,RemoteService.class);
 //        bindService(intent,connection, Service.BIND_AUTO_CREATE);
@@ -36,7 +51,77 @@ public class MainActivity extends AppCompatActivity {
 //        {
 //            Log.i(TAG, "onCreate2: "+nums[i]);
 //        }
+        initchronmeter();
+    }
+    private class MyRunnable implements Runnable {
+        @Override
+        public void run() {
+            if (seconds<0){
+                if (null != mRunnable) {
+                    mHandler.removeCallbacks(mRunnable);
+                    mRunnable = null;
+                    return;
+                }
+            }
+            cmPasstime.setText(formatseconds());
+            mHandler.postDelayed(this, 1000);
+        }
+    }
 
+    private MyRunnable mRunnable = null;
+
+    private void initchronmeter(){
+//        cmPasstime.setBase(SystemClock.elapsedRealtime());
+//        cmPasstime.setFormat("计时：%s");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 13);
+        calendar.set(Calendar.MINUTE,50);
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,0);
+        long timeInMillisfor21 = calendar.getTimeInMillis();
+
+        long curenttime = System.currentTimeMillis();
+
+//        long time = 0L;
+        mNextTime = Math.abs(timeInMillisfor21- curenttime)/1000;
+
+        seconds =  Math.abs(timeInMillisfor21- curenttime)/1000;
+        cmPasstime.setBase(SystemClock.elapsedRealtime());
+//        cmPasstime.setText(formatseconds());
+
+        if (mRunnable == null)
+            mRunnable = new MyRunnable();
+        mHandler.postDelayed(mRunnable, 0);
+
+//        cmPasstime.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+//            @Override
+//            public void onChronometerTick(Chronometer chronometer) {
+////                String time = chronometer.getText().toString();
+//                if (mNextTime <= 0) {
+//                    cmPasstime.stop();
+//                }
+//
+//                cmPasstime.setText(String.format("倒计时：%s", mFormat.format(new Date(mNextTime * 1000))));
+//                mNextTime--;
+//            }
+//        });
+//        cmPasstime.start();
+
+    }
+
+    public String formatseconds() {
+        String hh = seconds / 3600 > 9 ? seconds / 3600 + "" : "0" + seconds
+                / 3600;
+        String mm = (seconds % 3600) / 60 > 9 ? (seconds % 3600) / 60 + ""
+                : "0" + (seconds % 3600) / 60;
+        String ss = (seconds % 3600) % 60 > 9 ? (seconds % 3600) % 60 + ""
+                : "0" + (seconds % 3600) % 60;
+
+        seconds--;
+
+        return hh + ":" + mm + ":" + ss;
     }
 
     private ServiceConnection connection =new ServiceConnection() {

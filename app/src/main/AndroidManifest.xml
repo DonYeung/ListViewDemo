@@ -14,8 +14,12 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
     android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.drcom.ListViewDemo.objectanimatordemo.ObjectAnimatorDemo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity android:name=".SecondActivity">
@@ -56,19 +60,15 @@
         </activity>
 
 
-        <activity android:name=".TestActivity">
-        </activity>
+<!--        <activity android:name=".com.drcom.ListViewDemo.TestActivity">-->
+<!--        </activity>-->
 
         <activity android:name=".RecycleViewActivity">
 
         </activity>
 
         <activity android:name=".ViewPager2Demo">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 
@@ -79,6 +79,24 @@
             android:exported="true"/>
 
         <service android:name=".TestServices"/>
+
+
+        <service android:name=".binddemo.MyService"/>
+
+
+        <!--<service
+            android:name=".aidldemo.AIDLService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.lypeer.aidl"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </service>-->
+
+<!--        <provider-->
+<!--            android:authorities="com.drcom.ListViewDemo.contentproviderdemo.MyProvider"-->
+<!--            android:name="com.drcom.ListViewDemo.contentproviderdemo.MyProvider"-->
+<!--            android:exported="true"/>-->
     </application>
 
 </manifest>
