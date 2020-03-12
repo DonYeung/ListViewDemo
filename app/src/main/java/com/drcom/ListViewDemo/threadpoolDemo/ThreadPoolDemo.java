@@ -21,7 +21,7 @@ public class ThreadPoolDemo extends AppCompatActivity {
         Executors.newCachedThreadPool().execute(new Runnable() {
             @Override
             public void run() {
-                Log.i("Don  ", "run: 测试git");
+//                Log.i("Don  ", "run: 测试git");
             }
         });
 
