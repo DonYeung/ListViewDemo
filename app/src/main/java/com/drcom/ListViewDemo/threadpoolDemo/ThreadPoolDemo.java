@@ -1,6 +1,7 @@
 package com.drcom.ListViewDemo.threadpoolDemo;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +21,7 @@ public class ThreadPoolDemo extends AppCompatActivity {
         Executors.newCachedThreadPool().execute(new Runnable() {
             @Override
             public void run() {
-
+                Log.i("Don  ", "run: 测试git");
             }
         });
 
