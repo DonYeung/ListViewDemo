@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class ThreadPoolDemo extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+//        super.onCreate(savedInstanceState);
     }
 
     private void test(){
